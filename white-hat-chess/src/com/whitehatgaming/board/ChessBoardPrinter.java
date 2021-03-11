@@ -3,11 +3,12 @@ package com.whitehatgaming.board;
 public class ChessBoardPrinter {
 
 	public static void PrintBoard(ChessBoard chessBoard) {
+		System.out.println("");
 		printLetterMarkings();
-		for(int x = 0; x < ChessBoard.BoardWidth; x++ ) {
-			int position = x + 1;
+		for(int y = 0; y < ChessBoard.BoardWidth; y++ ) {
+			int position = y + 1;
 			System.out.print(position + " ");
-			for(int y = 0; y < ChessBoard.BoardHeight; y++) {
+			for(int x = 0; x < ChessBoard.BoardHeight; x++) {
 				var chessBoardPosition = chessBoard.getChessBoardPosition(x, y);
 				System.out.print(chessBoardPosition.toString() + " ");
 			}	

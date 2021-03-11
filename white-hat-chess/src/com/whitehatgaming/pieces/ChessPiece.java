@@ -1,6 +1,7 @@
 package com.whitehatgaming.pieces;
 
 import com.whitehatgaming.ColorEnum;
+import com.whitehatgaming.IllegalMoveException;
 import com.whitehatgaming.board.ChessBoardPosition;
 
 public abstract class ChessPiece {
@@ -31,7 +32,17 @@ public abstract class ChessPiece {
 	
 	public abstract boolean isLegalMove(ChessBoardPosition chessBoardPosition);
 	
-	public abstract ChessBoardPosition move(ChessBoardPosition chessBoardPosition);
+	public abstract boolean isCheck();
+	
+	public ChessBoardPosition move(ChessBoardPosition chessBoardPosition) throws IllegalMoveException {
+		if(!isLegalMove(chessBoardPosition)) {
+			throw new IllegalMoveException();
+		}		
+		chessBoardPosition.setChessPiece(this);
+		this.chessBoardPosition.setChessPiece(null);
+		this.chessBoardPosition = chessBoardPosition;		
+		return chessBoardPosition;
+	}
 	
 	@Override
 	public String toString() {

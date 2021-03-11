@@ -19,17 +19,21 @@ public class ChessBoard {
 	}
 	
 	public ChessBoardPosition getChessBoardPosition(int x, int y) {
+		if(x < 0 || x > (BoardWidth - 1) || y < 0 || y > (BoardHeight - 1)) {
+			return null;
+		}
 		return chessBoardPositions[x][y];
 	}
-
+	
 	public void InitBoard() {
 		chessBoardPositions = new ChessBoardPosition[BoardWidth][BoardHeight];
 		
+		var color = ColorEnum.WHITE;
 		for(int x = 0; x < ChessBoard.BoardWidth; x++ ) {
 			for(int y = 0; y < ChessBoard.BoardHeight; y++) {
 				var position = y + 1; 
-				chessBoardPositions[x][y] = new ChessBoardPosition(x, y, 'A' + String.valueOf(x) + String.valueOf(position + 1), 
-						null, ((x + y) %2 == 0) ? ColorEnum.BLACK : ColorEnum.WHITE);
+				chessBoardPositions[x][y] = new ChessBoardPosition(x, y, String.valueOf((char)('A' + x)) + String.valueOf(position), 
+						null, color == ColorEnum.WHITE ? ColorEnum.BLACK : ColorEnum.WHITE, this);
 			}			
 		}		
 		
@@ -37,21 +41,22 @@ public class ChessBoard {
 		setChessPieces(7, ColorEnum.WHITE);	
 		
 		for(int i = 0; i < BoardWidth; i++) {
-			chessBoardPositions[1][i].setChessPiece(new PawnChessPiece(chessBoardPositions[1][i], ColorEnum.BLACK));
-			chessBoardPositions[6][i].setChessPiece(new PawnChessPiece(chessBoardPositions[6][i], ColorEnum.WHITE));
+			chessBoardPositions[i][1].setChessPiece(new PawnChessPiece(chessBoardPositions[i][1], ColorEnum.BLACK));
+			chessBoardPositions[i][6].setChessPiece(new PawnChessPiece(chessBoardPositions[i][6], ColorEnum.WHITE));
 		}	
 
 	}
 	
 	private void setChessPieces(int x, ColorEnum color) {
-		chessBoardPositions[x][0].setChessPiece(new RookChessPiece(chessBoardPositions[x][0], color));
-		chessBoardPositions[x][1].setChessPiece(new BishopChessPiece(chessBoardPositions[x][1], color));
-		chessBoardPositions[x][2].setChessPiece(new KnightChessPiece(chessBoardPositions[x][2], color));
-		chessBoardPositions[x][3].setChessPiece(new QueenChessPiece(chessBoardPositions[x][3], color));
-		chessBoardPositions[x][4].setChessPiece(new KingChessPiece(chessBoardPositions[x][4], color));
-		chessBoardPositions[x][5].setChessPiece(new KnightChessPiece(chessBoardPositions[x][5], color));
-		chessBoardPositions[x][6].setChessPiece(new BishopChessPiece(chessBoardPositions[x][6], color));
-		chessBoardPositions[x][7].setChessPiece(new RookChessPiece(chessBoardPositions[x][7], color));
+		chessBoardPositions[0][x].setChessPiece(new RookChessPiece(chessBoardPositions[0][x], color));		
+		chessBoardPositions[1][x].setChessPiece(new KnightChessPiece(chessBoardPositions[1][x], color));
+		chessBoardPositions[2][x].setChessPiece(new BishopChessPiece(chessBoardPositions[2][x], color));
+		chessBoardPositions[3][x].setChessPiece(new QueenChessPiece(chessBoardPositions[3][x], color));
+		chessBoardPositions[4][x].setChessPiece(new KingChessPiece(chessBoardPositions[4][x], color));
+		chessBoardPositions[5][x].setChessPiece(new BishopChessPiece(chessBoardPositions[5][x], color));
+		chessBoardPositions[6][x].setChessPiece(new KnightChessPiece(chessBoardPositions[6][x], color));
+		chessBoardPositions[7][x].setChessPiece(new RookChessPiece(chessBoardPositions[7][x], color));
 	}
+	
 	
 }

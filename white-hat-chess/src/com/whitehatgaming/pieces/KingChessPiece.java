@@ -12,14 +12,28 @@ public class KingChessPiece extends ChessPiece {
 
 	@Override
 	public boolean isLegalMove(ChessBoardPosition chessBoardPosition) {
-		// TODO Auto-generated method stub
-		return false;
+		int xDiff = this.chessBoardPosition.getX() - chessBoardPosition.getX();
+		int yDiff = this.chessBoardPosition.getY() - chessBoardPosition.getY();
+		
+		if(Math.abs(xDiff) > 1 || Math.abs(yDiff) > 1) {
+			return false;
+		}
+		
+		var chessPiece = chessBoardPosition.getChessPiece();
+		if(chessPiece != null) {
+			if(chessPiece.getColor() == getColor()) {
+				return false;
+			}
+		}
+		
+		//TODO: opponent king check
+		return true;
 	}
 
 	@Override
-	public ChessBoardPosition move(ChessBoardPosition chessBoardPosition) {
+	public boolean isCheck() {
 		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 
 }

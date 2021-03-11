@@ -10,14 +10,16 @@ public class ChessBoardPosition {
 	private String label;
 	private ChessPiece chessPiece;
 	private ColorEnum fieldColour;
+	private ChessBoard chessBoard;
 		
-	public ChessBoardPosition(int x, int y, String label, ChessPiece chessPiece, ColorEnum fieldColour) {
+	public ChessBoardPosition(int x, int y, String label, ChessPiece chessPiece, ColorEnum fieldColour, ChessBoard chessBoard) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.label = label;
 		this.chessPiece = chessPiece;
 		this.fieldColour = fieldColour;
+		this.chessBoard = chessBoard;
 	}
 	
 	public int getX() {
@@ -51,6 +53,10 @@ public class ChessBoardPosition {
 	public void setFieldColour(ColorEnum fieldColour) {
 		this.fieldColour = fieldColour;
 	}	
+	public ChessBoard getChessBoard() {
+		return chessBoard;
+	}
+	
 	
 	@Override
 	public String toString() {
@@ -59,4 +65,6 @@ public class ChessBoardPosition {
 		}
 		return "|_|";
 	}
+
+
 }
